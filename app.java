@@ -10,15 +10,17 @@ public class app {
         Scanner teclado = new Scanner(System.in);
         ArrayList<conta> contas = new ArrayList<>();
         ArrayList<comunidade> comunidades = new ArrayList<>();
+        ArrayList<feed> feeds = new ArrayList<>();
+
 
         do{
           System.out.print("\n===== MENU =====\nDigite uma opcao:\n");
-          System.out.print("\n[1] Criar uma Conta\n[2] Editar um Perfil\n[3] Adicionar Amigos\n[4] Enviar uma mensagem\n[5] Criar uma comunidade\n[6] Adicionar membrosa uma comunidade\n[7] Recuperar informacoes de uma conta\n[8] Remover uma Conta\n[9] Enviar mensagens no feed de noticias\n[10] Visualzar mensagens no feed\n[11] Mostrar Cadastrados\n[12] Mostrar Comunidades\n[-1] Sair\n");
+          System.out.print("\n[1] Criar uma Conta\n[2] Editar um Perfil\n[3] Adicionar Amigos\n[4] Enviar uma mensagem\n[5] Criar uma comunidade\n[6] Adicionar membros a uma comunidade\n[7] Recuperar informacoes de uma conta\n[8] Remover uma Conta\n[9] Enviar mensagens no feed de noticias\n[10] Visualzar mensagens no feed\n[11] Mostrar Cadastrados\n[12] Mostrar Comunidades\n[-1] Sair\n");
           opcao = teclado.nextInt();
           teclado.nextLine(); 
 
-          switch(opcao)
-          {
+          switch(opcao){
+          
             case -1: //parar o programa
             {
               System.out.printf("Saindo...");
@@ -160,23 +162,67 @@ public class app {
 
             break;
             
-            /*case 5: //criar uma comunidade
-            
+            case 5: //criar uma comunidade
+
+            System.out.println("\n=== Criar uma comunidade");
+            System.out.print("Digite seu login: ");
+            String cmlogin = teclado.nextLine();
+
+            System.out.print("Digite sua senha: ");
+            String cmsenha = teclado.nextLine();
+
+            for(int i = 0; i < contas.size(); i++)
+            {
+              conta uTemp = contas.get(i);
+
+              if(cmlogin.equals(uTemp.getLogin()) && cmsenha.equals(uTemp.getSenha()))
+              {
+                String nome_comunidade, descricao_comunidade;
+                System.out.print("\nConta encontrada. Digite o nome que da comunidade a ser criada: ");
+                nome_comunidade = teclado.nextLine();
+                
+                System.out.println("Escreva uma breve descricao sobre a comunidade:\n");
+                
+                descricao_comunidade = teclado.nextLine();
+                
+
+                comunidade cm = new comunidade();
+
+                cm.adicionar(uTemp.getNome(), nome_comunidade, descricao_comunidade, uTemp.getNome());
+                comunidades.add(cm);
+                
+                }else{
+                System.out.println("\nSenha ou e-mail invalidos.");
+                }
+            }
+
+            break; 
+            case 6: //adicionar membros a uma comunidade
+            System.out.println("\n=== Adicionar memrbos a uma comunidade");
             System.out.print("Digite o nome da comunidade: ");
-            String x = teclado.nextLine();
+            String ncomunidade = teclado.nextLine();
 
-            System.out.print("Escreva uma breve descricao sobre ela: ");
-            String y = teclado.nextLine();
+            for(int i = 0; i < comunidades.size(); i++)
+            {
+              comunidade uTemp = comunidades.get(i);
 
-            comunidade co = new comunidade();
+              if(ncomunidade.equals(uTemp.getNome()))
+              {
+                String nmembro;
+                System.out.print("\nComunidade encontrada. Digite o nome do membro a ser adicionado: ");
+                nmembro = teclado.nextLine();
 
-            co.adicionar(nome, login, senha);
-            contas.add(c);
+                uTemp.setMembros(nmembro);
 
-            break; */
+                System.out.print("\n=== Membro adicionado");
 
-            //case 6: //adicionar membros a uma comunidade
-            
+              }else{
+                System.out.println("\nSenha ou e-mail invalidos.");
+                break;
+              }
+            }
+            break;
+
             case 7: //recuperar infomarções
 
             System.out.println("\n=== Recuperar informacoes de um usuario");
@@ -227,15 +273,53 @@ public class app {
                 System.out.println("\nSenha ou e-mail invalidos.");
                 break;
               }
-
             }
             break;
 
-            //case 9: //envio de mensagens no feed
-            //case 10: //controle de visualizacao do feed
+            case 9: //envio de mensagens no feed
+            System.out.println("\n=== Enviar mensagens no feed");
+            System.out.print("Digite seu login: ");
+            String flogin = teclado.nextLine();
+
+            System.out.print("Digite sua senha: ");
+            String fsenha = teclado.nextLine();
+
+            for(int i = 0; i < contas.size(); i++)
+            {
+              conta uTemp = contas.get(i);
+
+              if(flogin.equals(uTemp.getLogin()) && fsenha.equals(uTemp.getSenha()))
+              {
+                String post;
+                
+                System.out.println("No que voce esta pensando?\n");
+                
+                post = teclado.nextLine();
+                
+                feed fe = new feed();
+
+                fe.adicionar(uTemp.getLogin(), post);
+                feeds.add(fe);
+                
+                }else{
+                System.out.println("\nSenha ou e-mail invalidos.");
+                }
+            }
+
+            break;
+            case 10: //controle de visualizacao do feed
+            System.out.println("=== Visualizar feed");
+            for(int i = 0; i < feeds.size(); i++){
+              
+              feed utemp = feeds.get(i);
+              System.out.println("\n@"+feeds.get(i).getUser() + "postou: ");
+              System.out.println(feeds.get(i).getTexto());
+            }
+
+            break;
 
             case 11:
-            System.out.println("=== Lista de Usuarios cadastrados no site:");
+            System.out.println("=== Lista de Usuarios cadastrados:");
             for(int i = 0; i < contas.size(); i++){
               
               conta utemp = contas.get(i);
@@ -246,10 +330,23 @@ public class app {
             }
             break;
           
+            case 12:
+            System.out.println("=== Lista de comunidades criadas:");
+            for(int i = 0; i < comunidades.size(); i++){
+              
+              comunidade utemp = comunidades.get(i);
+              System.out.println("Dono: " + comunidades.get(i).getDono());
+              System.out.println("Nome: " + comunidades.get(i).getNome());
+              System.out.println("Descricao: " + comunidades.get(i).getDescricao());
+              System.out.println("Membros: " + comunidades.get(i).getMembros());
+            }
+            break;
+
             default:
               System.out.printf("Nenhuma das opcoes foi escolhida.\n");
             break;
+    
         }
-        }while(opcao!=-1);
+      }while(opcao!=-1);
       }
-}
+    }
