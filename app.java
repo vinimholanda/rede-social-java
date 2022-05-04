@@ -1,5 +1,5 @@
 // MELHORIAS: Menu reformualdo com novos modos; Melhoria em algumas funcionalidades; Modo admin para visualizacao e gerenciamento das contas; Correção de alguns bugs.
-// Senha para acesso no modo admin: 1234 (pode ser alterada na linha 276)
+// Senha para acesso no modo admin: 1234 (pode ser alterada na linha 276).
 
 import java.util.ArrayList;
 import java.util.Scanner;
