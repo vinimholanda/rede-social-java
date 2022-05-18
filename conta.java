@@ -1,4 +1,3 @@
-
 public class conta {
     
     private String nome;
@@ -14,7 +13,6 @@ public class conta {
         System.out.printf("\nConta adicionada com sucesso.\n");
     }
 
-    
     public String getSenha() {
         return senha;
     }

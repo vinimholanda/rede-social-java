@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.lang.IndexOutOfBoundsException;
 
-public class app {
+public class bckp {
     public static void main(String[] args)
     {
         int opcao;
