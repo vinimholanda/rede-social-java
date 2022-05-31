@@ -1,0 +1,56 @@
+**FAZER UM README NO GITHUB
+
+Menus: (OK) 
+Corrigir se o usuário digitar uma letra. "Você deve digitar um número!" OK
+Trocar frase se o usuário escolher um numero que nao esta entre os da lista (Nenhuma das opcoes foi escolhida.) OK
+
+1 - Criar perfil (!!!) -OK
+
+    Validação de e-mail: "Digite um e-mail do tipo nome@nome" conter 1 @ e nao pode tudo numero OK
+    Validação de nome: "Seu nome não pode ser um numero. Digite por ex: Maria, Felipe e etc. OK
+    Sua senha deve ter pelo menos uma letra, um numero e um caractere especial (@, #, $, %, &, *) OK
+
+    ++ NOME NÃO PODE CONTER UM NUMERO?
+    ++ TRY CATCH?
+
+2 - Editar perfil (!!!) 
+
+    Seu e-mail, nome e senha não pode ser igual a primeira 
+    Colocar regras da criacao de perfil
+
+3 - Adicionar Amigos ()
+
+    Deve ser um usuário existente OK
+
+4 - Escrever uma mensagem (!!) 
+
+    Mensagem nao pode ser vazia
+
+5 - Criar uma comunidade (!!!)
+    O nome da comunidade não pode ser somente números OK
+    A descricao da comunidade nao pode ser vazia (OK) OK
+
+6 - Adicionar membros a uma comunidade (!!)
+
+    A comunidade deve existir --> ja ta feito
+    Verificar se o membro existe ("usuário nao encontrado" ou "Deve ser um mebro existente")
+
+7 - Visualziar mensagens no feed ()
+
+    NÃO PRECISA
+
+8 - Remover sua conta ()
+
+    NÃO PRECISA
+
+Melhorias extras: (!!)
+    ++Add data de aniversario na criacao de perfil e nos dados
+    Corrigir "adicionar amigos"
+            --> Criar uma opcao "ver solicitações" 
+    Melhorar mensagem privada
+    Corrigir Membros da comunidade
+    "remover sua conta" fecha o programa caso o usuario estiver logado
+    deixar o menu mais bonitinho
+
+    --> CRIAR FUNCIONALIDADE "GERENCIAR AMIGOS" (escolher um nome melhro depois)
+            A ideia é criar uma funcionalide que englobe adicionar amigos, ver solicitações, excluir amigos, ver amigos.
