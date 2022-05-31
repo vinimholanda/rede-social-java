@@ -1,4 +1,4 @@
-// MELHORIAS: Tratamentos de erro (Em cada uma das funcionalidades) PS ainda n terminei
+// MELHORIAS: Tratamentos de erro (Menus e funcionalidades antigas), e novas funcoes de admin para bloqueio de palavras no feed publico
 // Senha para acesso no modo admin: 1234 (pode ser alterada na linha 276).
 
 import java.util.*;
@@ -18,9 +18,11 @@ public class app {
         String nome, login, senha;
 
         Scanner teclado = new Scanner(System.in);
+        
         ArrayList<conta> contas = new ArrayList<>();
         ArrayList<comunidade> comunidades = new ArrayList<>();
         ArrayList<feed> feeds = new ArrayList<>();
+        ArrayList<palavra> palavras = new ArrayList<>();
 
         while(parar == false){
             try {
@@ -135,44 +137,83 @@ public class app {
                                 teclado.nextLine();
                                 int zzcont = 0;
     
-                                if(choice == 1){
-                                    System.out.println("Digite o usuario que recebera a mensagem:");
-                                    String usu1 = teclado.nextLine();
+                                            if(choice == 1){
+                                                System.out.println("Digite o usuario que recebera a mensagem:");
+                                                String usu1 = teclado.nextLine();
+                
+                                                for(int zz = 0; zz < contas.size(); zz++)
+                                                {
+                                                conta zzedTemp = contas.get(zz);
+                
+                                                if(usu1.equals(zzedTemp.getNome())){ //achou o usuario
+                                                    zzcont = 1;
+
+                                                    while(true){
+                                                        System.out.printf("\nDigite que a mensagem para %s\n", usu1);
+                                                        String mensag = teclado.nextLine();
+                                                        
+                                                        if (mensag.isBlank()) {
+                                                            System.out.println("Sua mensagem nao pode ser em branco");
+                                                        } else {
+                                                            break;
+                                                        }
+                                                    }
+                                                    System.out.print("\nMensagem enviada.\n");
+                                                    break;
+                                                }}
+                
+                                                if(zzcont == 0){
+                                                    System.out.println("\nUsuario nao encontrado.");
+                                                }
+                
+                                                break;
+                
+                                            }else if(choice == 2){
+                                                String post;
+                                    
+                                                while(true){
+
+                                                    System.out.println("No que voce esta pensando?\n");
+                                                    post = teclado.nextLine();
+
+                                                    int contz = 0;
+
+                                                    if (post.isBlank()) {
+                                                        System.out.println("(!) Sua mensagem nao pode ser em branco\n");
+                                                    } else {
+
+                                                        for(int z = 0; z < palavras.size(); z++){
+
+                                                            palavra zedTemp = palavras.get(z);
+
+                                                            if(post.contains(zedTemp.getPalavra())){
+                                                                contz = contz + 1;
+                                                            }
+                                                        }
+
+                                                        if(contz > 0){
+                                                            System.out.printf("\n(!) Sua mensagem contem uma palavra ofensiva e portando nao pode ser postado no feed publico\n\n");
+                                                        }else{
+                                                            break;
+                                                        }   
+                                                    }
+                                                }
+                                                
+                                                feed fe = new feed();
     
-                                    for(int zz = 0; zz < contas.size(); zz++)
-                                    {
-                                    conta zzedTemp = contas.get(zz);
-    
-                                    if(usu1.equals(zzedTemp.getNome())){
-                                        zzcont = 1;
-                                        System.out.printf("\nDigite que a mensagem para @%s\n", usu1);
-                                        String mensag = teclado.nextLine();
-    
-                                        System.out.print("\nMensagem enviada.\n");
-                                        break;
-                                    }}
-    
-                                    if(zzcont == 0){
-                                        System.out.println("\nUsuario nao encontrado.");
-                                    }
-    
-                                    break;
-    
-                                }else if(choice == 2){
-                                    String post;
-                        
-                                    System.out.println("No que voce esta pensando?\n");
-                                    post = teclado.nextLine();
-                        
-                                    feed fe = new feed();
-    
-                                    fe.adicionar(uTemp.getLogin(), post);
-                                    feeds.add(fe);
-    
-                                }else{
-                                    System.out.println("\nEscolha uma alternativa valida!");
-                                }
-                                break;
+                                                fe.adicionar(uTemp.getLogin(), post);
+                                                feeds.add(fe);
+
+                                                System.out.print("\nPostado no feed com sucesso.\n");
+                                                break;
+
+                                            }
+                
+                
+                                            else{
+                                                System.out.println("\nEscolha uma alternativa valida!");
+                                            }
+                                            break;
     
                                 case 4: //criar uma comunidade
                                     String nome_comunidade, descricao_comunidade;
@@ -246,7 +287,7 @@ public class app {
                                 for(int r = 0; r < feeds.size(); r++){
                     
                                 feed utemp = feeds.get(r);
-                                System.out.println("\n@"+feeds.get(r).getUser() + " postou: ");
+                                System.out.println("\n(@)"+feeds.get(r).getUser() + " postou: ");
                                 System.out.println(feeds.get(r).getTexto());
                                 }
                                 break;
@@ -363,7 +404,7 @@ public class app {
                             
                             if(asenha.equals(senha_padrao)){
                                 do{
-                                System.out.println("\n==== Modo admin\nDigite uma opcao:\n[1] Mostrar usuarios criados\n[2] Mostrar comunidades criadas\n[3] Apagar conta de usuario\n[4] Recuperar informacoes de um usuario\n[-1] Sair");
+                                System.out.println("\n==== Modo admin\nDigite uma opcao:\n[1] Mostrar usuarios criados\n[2] Mostrar comunidades criadas\n[3] Apagar conta de usuario\n[4] Recuperar informacoes de um usuario\n[5] Adicionar palavra ofensiva\n[6] Mostrar palavras ofensivas\n[-1] Sair");
                                 opcao3 = teclado.nextInt();
                                 teclado.nextLine();
                                 
@@ -440,8 +481,28 @@ public class app {
                                             }
                                         }
                                         break;
+
+                                        case 5:
+                                        System.out.println("== Adicionar palavra ofensiva");
+                                        System.out.print("Digite o palavra ofensiva a ser adicionada: ");
+                                        String palavra_ofensiva = teclado.nextLine();
+
+                                        palavra p = new palavra();
+                                        p.adicionar_palavra(palavra_ofensiva);
+                                        palavras.add(p);
+                                    
+                                        break;
+
+                                        case 6:
+                                            System.out.println("=== Lista palavras ofensivas:");
+                                            for(int r = 0; r < palavras.size(); r++){
+                    
+                                                palavra utemp = palavras.get(r);
+                                                System.out.println("\n'" + palavras.get(r).getPalavra() + "'");
+                                                }
+                                        break;
             
-                                        /*case 5: //alterar senha de admin
+                                        /*case 7: //alterar senha de admin
                                         System.out.println("Digite a senha atual novamente: ");
                                         int vsenha = teclado.nextInt();
                                         teclado.nextLine();
