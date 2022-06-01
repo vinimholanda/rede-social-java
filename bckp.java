@@ -16,6 +16,8 @@ public class bckp {
         int opcao;
         boolean parar = false;
         String nome, login, senha;
+        int auxparar = 0;
+        int auxparar2 = 0;
 
         Scanner teclado = new Scanner(System.in);
         
@@ -26,6 +28,10 @@ public class bckp {
 
         while(parar == false){
             try {
+
+                if(auxparar == 1){//resolver bug do usuario fechar conta enquanto logado
+                    contas.remove(auxparar2);
+                }
                 
                 System.out.print("\n===== A rede social =====\nDigite uma opcao:\n");
                 System.out.print("\n[1] Fazer login\n[2] Criar uma conta\n[3] Admin\n[-1] Sair\n");
@@ -55,317 +61,325 @@ public class bckp {
                     if(elogin.equals(uTemp.getLogin()) && esenha.equals(uTemp.getSenha()))//logado
                     {
                         int opcao2 = 0;
-                        do{
+                        boolean parar2 = false;
+                        
+                        while(parar2 == false){
+
                             try {
                                 System.out.println("\n============\nOla, " + contas.get(i).getNome() + "!");
                             System.out.print("\nDigite uma opcao: \n[1] Editar seu perfil\n[2] Adicionar amigos\n[3] Escrever uma mensagem\n[4] Criar uma comunidade\n[5] Adicionar membros a uma comunidade\n[6] Minhas informacoes\n[7] Visualizar mensagens no feed\n[8] Remover sua conta\n[-1] Sair\n");
                             opcao2 = teclado.nextInt();
                             teclado.nextLine();
                             cont = cont + 1;
+
+
+                                switch(opcao2){ // ESCOLHA DO USUARIO LOGADO
+                                    case -1:
+                                    System.out.println("Saindo...");
+                                    parar2 = true;
+                                    break;
+        
+                                    case 1: //editar perfil
+                                        System.out.println("\nQue informacao voce quer editar?\n[1]NOME\n[2]LOGIN\n[3]SENHA\n[-1]SAIR\n");
+                                        int e = teclado.nextInt();
+                                        teclado.nextLine();
+                                        
                             
+                                        switch(e){
+                                            case 1:
     
-                            switch(opcao2){ // ESCOLHA DO USUARIO LOGADO
-                                case -1:
-                                System.out.println("Saindo...");
-                                break;
-    
-                                case 1: //editar perfil
-                                    System.out.println("\nQue informacao voce quer editar?\n[1]NOME\n[2]LOGIN\n[3]SENHA\n[-1]SAIR\n");
-                                    int e = teclado.nextInt();
-                                    teclado.nextLine();
-                                    
-                        
-                                    switch(e){
-                                        case 1:
-
-                                        while(true){
-                                            
-                                        System.out.print("Digite seu novo nome: ");
-                                        String x = teclado.nextLine();
-
-                                        boolean isNumeric = x.chars().allMatch( Character::isDigit );
-                    
-                                            if (isNumeric || x.equals(uTemp.getNome())) {
-                                                System.out.println("\n(!) Seu nome nao pode ser somente numeros e não pode ser igual ao primeiro.\n");
-                                                continue;
-                                            } else {
-                                                uTemp.setNome(x);
-                                                break;
-                                            }
-                                        }
-    
-                                        System.out.print("\nNome alterado com sucesso.\n");
-                                        break;
-
-                                        case 2:
-                                        while(true){
-
-                                            System.out.print("Digite seu novo login: ");
-                                            String y = teclado.nextLine();
-
-                                            if (y.contains("@") && y.contains(".") && (!y.equals(uTemp.getLogin()))) {
-                                                uTemp.setLogin(y);
-                                                break;
-                                            } else {
-                                                System.out.println("\n(!) Seu login deve ser um email valido e nao pode ser igual ao ultimo.\n");
-                                                continue;
-                                            }
-                                        }
-    
-                                        System.out.print("\nLogin alterado com sucesso.\n");
-                                        break;
-    
-                                        case 3:
-
-                                        while(true){
-
-                                            System.out.print("Digite sua nova senha: ");
-                                            String zz = teclado.nextLine();
-    
-                                            boolean isNumeric2 = zz.chars().allMatch( Character::isDigit );
-
-                                            if((zz.contains("@") || zz.contains("#") || zz.contains("$") || zz.contains("%") || zz.contains("&") || zz.contains("*"))){
+                                            while(true){
                                                 
-                                                if ((zz.contains("1") || zz.contains("2") || zz.contains("3") || zz.contains("4") || zz.contains("5") || zz.contains("6") || zz.contains("7") || zz.contains("8") || zz.contains("9"))) {
+                                            System.out.print("Digite seu novo nome: ");
+                                            String x = teclado.nextLine();
+    
+                                            boolean isNumeric = x.chars().allMatch( Character::isDigit );
+                        
+                                                if (isNumeric || x.equals(uTemp.getNome())) {
+                                                    System.out.println("\n(!) Seu nome nao pode ser somente numeros e não pode ser igual ao primeiro.\n");
+                                                    continue;
+                                                } else {
+                                                    uTemp.setNome(x);
+                                                    break;
+                                                }
+                                            }
+        
+                                            System.out.print("\nNome alterado com sucesso.\n");
+                                            break;
+    
+                                            case 2:
+                                            while(true){
+    
+                                                System.out.print("Digite seu novo login: ");
+                                                String y = teclado.nextLine();
+    
+                                                if (y.contains("@") && y.contains(".") && (!y.equals(uTemp.getLogin()))) {
+                                                    uTemp.setLogin(y);
+                                                    break;
+                                                } else {
+                                                    System.out.println("\n(!) Seu login deve ser um email valido e nao pode ser igual ao ultimo.\n");
+                                                    continue;
+                                                }
+                                            }
+        
+                                            System.out.print("\nLogin alterado com sucesso.\n");
+                                            break;
+        
+                                            case 3:
+    
+                                            while(true){
+    
+                                                System.out.print("Digite sua nova senha: ");
+                                                String zz = teclado.nextLine();
+        
+                                                boolean isNumeric2 = zz.chars().allMatch( Character::isDigit );
+    
+                                                if((zz.contains("@") || zz.contains("#") || zz.contains("$") || zz.contains("%") || zz.contains("&") || zz.contains("*"))){
                                                     
-                                                    if (!zz.equals(uTemp.getSenha())) {
-                                                        uTemp.setSenha(zz);
-                                                        break;
+                                                    if ((zz.contains("1") || zz.contains("2") || zz.contains("3") || zz.contains("4") || zz.contains("5") || zz.contains("6") || zz.contains("7") || zz.contains("8") || zz.contains("9"))) {
+                                                        
+                                                        if (!zz.equals(uTemp.getSenha())) {
+                                                            uTemp.setSenha(zz);
+                                                            break;
+                                                        } else {
+                                                            System.out.println("\n(!) Sua senha deve conter no minimo 1 numero, 1 caractere especial (@, #, $, %, &, *) e nao pode ser igual a ultima.\n");
+                                                        }
+    
                                                     } else {
                                                         System.out.println("\n(!) Sua senha deve conter no minimo 1 numero, 1 caractere especial (@, #, $, %, &, *) e nao pode ser igual a ultima.\n");
                                                     }
-
-                                                } else {
+                        
+                                                }else{
                                                     System.out.println("\n(!) Sua senha deve conter no minimo 1 numero, 1 caractere especial (@, #, $, %, &, *) e nao pode ser igual a ultima.\n");
                                                 }
-                    
-                                            }else{
-                                                System.out.println("\n(!) Sua senha deve conter no minimo 1 numero, 1 caractere especial (@, #, $, %, &, *) e nao pode ser igual a ultima.\n");
                                             }
+                                            
+                                            System.out.print("\nSenha alterada com sucesso\n");
+                                            break;
+                                        
+                                            case -1:
+                                            System.out.println("Processo cancelado");
+                                            break;
+                                        
+                                            default: 
+                                            System.out.println("Nenhuma das opcoes foi escolhida.");
+                                            break;
+                                        }
+                                    break;
+        
+                                    case 2: //adicionar amigos
+                                    String ed;
+                                    int zcont = 0;
+                                    System.out.print("\nDigite o usuario que voce quer enviar a solicitacao: ");
+                                    String zed = teclado.nextLine();
+        
+                                        for(int z = 0; z < contas.size(); z++)
+                                        {
+                                        conta zedTemp = contas.get(z);
+        
+                                        if(zed.equals(zedTemp.getNome())){
+                                            zcont = 1;
+                                            System.out.printf("Solicitacao enviada para @%s\n", zed);
+                                            break;
+                                        }}
+        
+                                        if(zcont == 0){
+                                            System.out.println("\nUsuario nao encontrado.");
                                         }
                                         
-                                        System.out.print("\nSenha alterada com sucesso\n");
-                                        break;
-                                    
-                                        case -1:
-                                        System.out.println("Processo cancelado");
-                                        break;
-                                    
-                                        default: 
-                                        System.out.println("Nenhuma das opcoes foi escolhida.");
-                                        break;
-                                    }
-                                break;
+                                    break;
+        
+                                    case 3: //enviar uma mensagem
+                                    System.out.println("\nQual o tipo de mensagem que voce quer enviar?\n[1] Privada\n[2] Publica");
+                                    int choice = teclado.nextInt();
+                                    teclado.nextLine();
+                                    int zzcont = 0;
+        
+                                                if(choice == 1){
+                                                    System.out.println("Digite o usuario que recebera a mensagem:");
+                                                    String usu1 = teclado.nextLine();
+                    
+                                                    for(int zz = 0; zz < contas.size(); zz++)
+                                                    {
+                                                    conta zzedTemp = contas.get(zz);
+                    
+                                                    if(usu1.equals(zzedTemp.getNome())){ //achou o usuario
+                                                        zzcont = 1;
     
-                                case 2: //adicionar amigos
-                                String ed;
-                                int zcont = 0;
-                                System.out.print("\nDigite o usuario que voce quer enviar a solicitacao: ");
-                                String zed = teclado.nextLine();
-    
-                                    for(int z = 0; z < contas.size(); z++)
-                                    {
-                                    conta zedTemp = contas.get(z);
-    
-                                    if(zed.equals(zedTemp.getNome())){
-                                        zcont = 1;
-                                        System.out.printf("Solicitacao enviada para @%s\n", zed);
-                                        break;
-                                    }}
-    
-                                    if(zcont == 0){
-                                        System.out.println("\nUsuario nao encontrado.");
-                                    }
-                                    
-                                break;
-    
-                                case 3: //enviar uma mensagem
-                                System.out.println("\nQual o tipo de mensagem que voce quer enviar?\n[1] Privada\n[2] Publica");
-                                int choice = teclado.nextInt();
-                                teclado.nextLine();
-                                int zzcont = 0;
-    
-                                            if(choice == 1){
-                                                System.out.println("Digite o usuario que recebera a mensagem:");
-                                                String usu1 = teclado.nextLine();
-                
-                                                for(int zz = 0; zz < contas.size(); zz++)
-                                                {
-                                                conta zzedTemp = contas.get(zz);
-                
-                                                if(usu1.equals(zzedTemp.getNome())){ //achou o usuario
-                                                    zzcont = 1;
-
-                                                    while(true){
-                                                        System.out.printf("\nDigite que a mensagem para %s\n", usu1);
-                                                        String mensag = teclado.nextLine();
-                                                        
-                                                        if (mensag.isBlank()) {
-                                                            System.out.println("Sua mensagem nao pode ser em branco");
-                                                        } else {
-                                                            break;
-                                                        }
-                                                    }
-                                                    System.out.print("\nMensagem enviada.\n");
-                                                    break;
-                                                }}
-                
-                                                if(zzcont == 0){
-                                                    System.out.println("\nUsuario nao encontrado.");
-                                                }
-                
-                                                break;
-                
-                                            }else if(choice == 2){
-                                                String post;
-                                    
-                                                while(true){
-
-                                                    System.out.println("No que voce esta pensando?\n");
-                                                    post = teclado.nextLine();
-
-                                                    int contz = 0;
-
-                                                    if (post.isBlank()) {
-                                                        System.out.println("(!) Sua mensagem nao pode ser em branco\n");
-                                                    } else {
-
-                                                        for(int z = 0; z < palavras.size(); z++){
-
-                                                            palavra zedTemp = palavras.get(z);
-
-                                                            if(post.contains(zedTemp.getPalavra())){
-                                                                contz = contz + 1;
+                                                        while(true){
+                                                            System.out.printf("\nDigite que a mensagem para %s\n", usu1);
+                                                            String mensag = teclado.nextLine();
+                                                            
+                                                            if (mensag.isBlank()) {
+                                                                System.out.println("Sua mensagem nao pode ser em branco");
+                                                            } else {
+                                                                break;
                                                             }
                                                         }
-
-                                                        if(contz > 0){
-                                                            System.out.printf("\n(!) Sua mensagem contem uma palavra ofensiva e portando nao pode ser postado no feed publico\n\n");
-                                                        }else{
-                                                            break;
-                                                        }   
-                                                    }
-                                                }
-                                                
-                                                feed fe = new feed();
-    
-                                                fe.adicionar(uTemp.getLogin(), post);
-                                                feeds.add(fe);
-
-                                                System.out.print("\nPostado no feed com sucesso.\n");
-                                                break;
-
-                                            }
-                
-                
-                                            else{
-                                                System.out.println("\nEscolha uma alternativa valida!");
-                                            }
-                                            break;
-    
-                                case 4: //criar uma comunidade
-                                    String nome_comunidade, descricao_comunidade;
-
-                                    while(true){//verifica se o nome da comunidade nao esta em branco
-                                        System.out.print("\nDigite o nome que da comunidade a ser criada: ");
-                                        nome_comunidade = teclado.nextLine();
-
-                                        if(nome_comunidade.isBlank()){
-                                            System.out.println("\n(!) Você nao pode deixar o nome da comunidade em branco.");
-                                        }else{
-                                            break;
-                                        }
-                                    }
-                        
-                                    while(true){//verifica se a descricao da comunidade esta em branco
-                                        System.out.println("Escreva uma breve descricao sobre a comunidade:\n");
-                                        descricao_comunidade = teclado.nextLine();
-
-                                        if(descricao_comunidade.isBlank()){
-                                            System.out.println("\n(!) Você nao pode deixar a descricao da comunidade em branco.\n");
-                                        }else{
-                                            break;
-                                        }
-                                    }
-                        
-                                    comunidade cm = new comunidade();
-    
-                                    cm.adicionar(uTemp.getNome(), nome_comunidade, descricao_comunidade, uTemp.getNome());
-                                    comunidades.add(cm);
-                                break;
-    
-                                case 5: //adicionar membros a uma comunidade
-                                int contcomunidade = 0;
-                                System.out.println("\n=== Adicionar memrbos a uma comunidade");
-                                System.out.print("Digite o nome da comunidade: ");
-                                String ncomunidade = teclado.nextLine();
-                                
-    
-                                for(int ii = 0; ii < comunidades.size(); ii++)
-                                {
-                                comunidade iTemp = comunidades.get(ii);
-    
-                                if(ncomunidade.equals(iTemp.getNome()))
-                                {
-                                    String nmembro;
-                                    contcomunidade = 1;
-                                    System.out.print("\nComunidade encontrada. Digite o nome do membro a ser adicionado: ");
-                                    nmembro = teclado.nextLine();
-    
-                                    iTemp.setMembros(nmembro);
-    
-                                    System.out.print("\n=== Membro adicionado");
-                                    break;
-                                }}
-                                if(contcomunidade == 0){
-                                    System.out.println("\nComunidade nao encontrada.");
-                                }
-                                break;
-    
-                                case 6: //Minhas informacoes da conta
-                                System.out.println("\n== Seus dados atuais:");
-                                System.out.println("Nome: " + uTemp.getNome());
-                                System.out.println("Email: " + uTemp.getLogin());
-                                System.out.println("Senha: " + uTemp.getSenha());
-                                System.out.println("Para alterar qualquer dado use a funcao editar perfil quando logado na rede.");
-                                break;
-    
-                                case 7: //visualizar mensagens no feed
-                                System.out.println("=== Visualizar feed");
-                                for(int r = 0; r < feeds.size(); r++){
+                                                        System.out.print("\nMensagem enviada.\n");
+                                                        break;
+                                                    }}
                     
-                                feed utemp = feeds.get(r);
-                                System.out.println("\n(@)"+feeds.get(r).getUser() + " postou: ");
-                                System.out.println(feeds.get(r).getTexto());
-                                }
-                                break;
+                                                    if(zzcont == 0){
+                                                        System.out.println("\nUsuario nao encontrado.");
+                                                    }
+                    
+                                                    break;
+                    
+                                                }else if(choice == 2){
+                                                    String post;
+                                        
+                                                    while(true){
     
-                                case 8: //remover conta
+                                                        System.out.println("No que voce esta pensando?\n");
+                                                        post = teclado.nextLine();
     
-                                    System.out.println("Digite sua senha novamente:");
-                                    String rsenha = teclado.nextLine();
+                                                        int contz = 0;
     
-                                    if(rsenha.equals(uTemp.getSenha())){
-                                        System.out.print("\nSenha confere. Tem certeza que quer remover sua conta?\n[1]SIM\n[2]NAO\n");
-                                        int ee = teclado.nextInt();
-                            
-                                        if(ee == 1){
-                                            contas.remove(i);
-                                            System.out.println("Conta removida!\nEncerrando a rede...");
-                                            break;
-                                        }else{
-                                            System.out.println("Sua conta nao foi removida.");
-                                            break;
+                                                        if (post.isBlank()) {
+                                                            System.out.println("(!) Sua mensagem nao pode ser em branco\n");
+                                                        } else {
+    
+                                                            for(int z = 0; z < palavras.size(); z++){
+    
+                                                                palavra zedTemp = palavras.get(z);
+    
+                                                                if(post.contains(zedTemp.getPalavra())){
+                                                                    contz = contz + 1;
+                                                                }
+                                                            }
+    
+                                                            if(contz > 0){
+                                                                System.out.printf("\n(!) Sua mensagem contem uma palavra ofensiva e portando nao pode ser postado no feed publico\n\n");
+                                                            }else{
+                                                                break;
+                                                            }   
+                                                        }
+                                                    }
+                                                    
+                                                    feed fe = new feed();
+        
+                                                    fe.adicionar(uTemp.getLogin(), post);
+                                                    feeds.add(fe);
+    
+                                                    System.out.print("\nPostado no feed com sucesso.\n");
+                                                    break;
+    
+                                                }
+                    
+                    
+                                                else{
+                                                    System.out.println("\nEscolha uma alternativa valida!");
+                                                }
+                                                break;
+        
+                                    case 4: //criar uma comunidade
+                                        String nome_comunidade, descricao_comunidade;
+    
+                                        while(true){//verifica se o nome da comunidade nao esta em branco
+                                            System.out.print("\nDigite o nome que da comunidade a ser criada: ");
+                                            nome_comunidade = teclado.nextLine();
+    
+                                            if(nome_comunidade.isBlank()){
+                                                System.out.println("\n(!) Você nao pode deixar o nome da comunidade em branco.");
+                                            }else{
+                                                break;
                                             }
-                                    }else{
-                                        System.out.println("Senha incorreta.");
-                                    }
-                                break;
+                                        }
+                            
+                                        while(true){//verifica se a descricao da comunidade esta em branco
+                                            System.out.println("Escreva uma breve descricao sobre a comunidade:\n");
+                                            descricao_comunidade = teclado.nextLine();
     
-                                default:
-                                    System.out.println("\nNenhuma das opcoes foi selecionada.");
-                                break;
-                            }
+                                            if(descricao_comunidade.isBlank()){
+                                                System.out.println("\n(!) Você nao pode deixar a descricao da comunidade em branco.\n");
+                                            }else{
+                                                break;
+                                            }
+                                        }
+                            
+                                        comunidade cm = new comunidade();
+        
+                                        cm.adicionar(uTemp.getNome(), nome_comunidade, descricao_comunidade, uTemp.getNome());
+                                        comunidades.add(cm);
+                                    break;
+        
+                                    case 5: //adicionar membros a uma comunidade
+                                    int contcomunidade = 0;
+                                    System.out.println("\n=== Adicionar memrbos a uma comunidade");
+                                    System.out.print("Digite o nome da comunidade: ");
+                                    String ncomunidade = teclado.nextLine();
+                                    
+        
+                                    for(int ii = 0; ii < comunidades.size(); ii++)
+                                    {
+                                    comunidade iTemp = comunidades.get(ii);
+        
+                                    if(ncomunidade.equals(iTemp.getNome()))
+                                    {
+                                        String nmembro;
+                                        contcomunidade = 1;
+                                        System.out.print("\nComunidade encontrada. Digite o nome do membro a ser adicionado: ");
+                                        nmembro = teclado.nextLine();
+        
+                                        iTemp.setMembros(nmembro);
+        
+                                        System.out.print("\n=== Membro adicionado");
+                                        break;
+                                    }}
+                                    if(contcomunidade == 0){
+                                        System.out.println("\nComunidade nao encontrada.");
+                                    }
+                                    break;
+        
+                                    case 6: //Minhas informacoes da conta
+                                    System.out.println("\n== Seus dados atuais:");
+                                    System.out.println("Nome: " + uTemp.getNome());
+                                    System.out.println("Email: " + uTemp.getLogin());
+                                    System.out.println("Senha: " + uTemp.getSenha());
+                                    System.out.println("Para alterar qualquer dado use a funcao editar perfil quando logado na rede.");
+                                    break;
+        
+                                    case 7: //visualizar mensagens no feed
+                                    System.out.println("=== Visualizar feed");
+                                    for(int r = 0; r < feeds.size(); r++){
+                        
+                                    feed utemp = feeds.get(r);
+                                    System.out.println("\n(@)"+feeds.get(r).getUser() + " postou: ");
+                                    System.out.println(feeds.get(r).getTexto());
+                                    }
+                                    break;
+        
+                                    case 8: //remover conta
+        
+                                        System.out.println("Digite sua senha novamente:");
+                                        String rsenha = teclado.nextLine();
+        
+                                        if(rsenha.equals(uTemp.getSenha())){
+                                            System.out.print("\nSenha confere. Tem certeza que quer remover sua conta?\n[1]SIM\n[2]NAO\n");
+                                            int ee = teclado.nextInt();
+                                
+                                            if(ee == 1){
+                                                System.out.println("Conta removida!");
+                                                auxparar = 1;
+                                                auxparar2 = i;
+                                                parar2 = true;
+                                                break;
+                                            }else{
+                                                System.out.println("Sua conta nao foi removida.");
+                                                break;
+                                                }
+                                        }else{
+                                            System.out.println("Senha incorreta.");
+                                        }
+                                    break;
+                                        
+        
+                                    default:
+                                        System.out.println("\nNenhuma das opcoes foi selecionada.");
+                                    break;
+                                }
+                            
     
                             } catch (InputMismatchException e_userlogado) {
                                 System.err.println("\nVocê deve digitar um numero.");
@@ -373,8 +387,8 @@ public class bckp {
                                 continue;
                             }
 
-                        }while(opcao2!=-1);
-                        
+                        }
+                            
                     }
                     }
                     
