@@ -1,0 +1,8 @@
+Code smells identificados:
+
+- Variáveis nao utilizadas;
+- Parâmetros passados e não utilizados;
+- Comentários desnecessários;
+- lista longa de parâmetros em uma classe;
+- Métodos fazendo mais que seu objetivo;
+- vários switchs e ifs no menu de escolhar.
