@@ -1,79 +1,27 @@
 **Exeções corrigidas:
 
-1) Criar perfil
-!!o nome nao pode conter so numeros
-!!o email deve ser do tipo exemplo@exemplo.com
-!!deve ter pelo menos uma letra, um numero e um caractere especial (@, #, $, %, &, *)
+!!menus nao param se o usuario digitar um char - "Você deve digitar um número!"
+!!o nome nao pode conter so numeros - ex: 23423 nao é um nome
+!!o email deve ser do tipo "exemplo@exemplo.com"
+!!a senha deve ter pelo menos uma letra, um numero e um caractere especial (@, #, $, %, &, *)
+!!o amigo adicionado deve ser um usuario existente (criado anteriormente)
+!!add "Nenhuma das opcoes foi escolhida" nos menus
+!!uma mensagem enviada (publica e privada) nao pode ser um texto em branco
+!!uma mensagem public nao pode conter uma palavra ofensiva (para adicionar uma palavra usar o menu ADMIN)
+!!ao adicionar um membro a uma comunidade ele tem que existir - ("usuário nao encontrado" ou "Deve ser um mebro existente")
+!!ao criar uma comunidade a descricao e nome delas nao pode estar em branco
+!!editar perfil com as mesmas regras de criacao de nome
+!!em editar perfil: seu e-mail, nome e senha nao pode ser igual a ultima criada
 
-2)Editar perfl
-!!
-
-3)Adicionar amigos
-!!deve ser um usuario existente (criado anteriormente)
-
-4)Escrever uma mensagem
-
-Outras ideias:
+**A fazer:
 !!nao pode existir dois usuarios com o mesmo nome
-!!receber mensagens
-!!publico postando o email ao inves do nome
-!!mensagem publica nao pode conter uma palavra ofensiva
-!!nao pode ter duas comunidades iguais
-!!admin poder adicionar em palavras feias
-!!adicioanar data de nascimento na criacao de perfil e corrigir o erro do usuario tentar colocar um numero
+!!nao pode ter duas comunidades com o mesmo nome
+!!"remover sua conta" fecha o programa caso o usuario estiver logado (java.lang.IndexOutOfBoundsException:)
 
-Menus: (OK) 
-Corrigir se o usuário digitar uma letra. "Você deve digitar um número!" OK
-Trocar frase se o usuário escolher um numero que nao esta entre os da lista (Nenhuma das opcoes foi escolhida.) OK
-
-1 - Criar perfil (!!!) -OK
-
-    Validação de e-mail: "Digite um e-mail do tipo nome@nome" conter 1 @ e nao pode tudo numero OK
-    Validação de nome: "Seu nome não pode ser um numero. Digite por ex: Maria, Felipe e etc. OK
-    Sua senha deve ter pelo menos uma letra, um numero e um caractere especial (@, #, $, %, &, *) OK
-
-    ++ NOME NÃO PODE CONTER UM NUMERO?
-    ++ TRY CATCH?
-
-2 - Editar perfil (!!!) 
-
-    Seu e-mail, nome e senha não pode ser igual a primeira 
-    Colocar regras da criacao de perfil
-
-3 - Adicionar Amigos ()
-
-    Deve ser um usuário existente OK
-
-4 - Escrever uma mensagem (!!) OK
-
-    Mensagem nao pode ser vazia 
-    Mensagem nao pode ser onfensiva
-
-5 - Criar uma comunidade (!!!)
-    O nome da comunidade não pode ser somente números OK
-    A descricao da comunidade nao pode ser vazia (OK) OK
-
-6 - Adicionar membros a uma comunidade (!!)
-
-    A comunidade deve existir OK
-    Verificar se o membro existe ("usuário nao encontrado" ou "Deve ser um mebro existente")
-
-7 - Visualziar mensagens no feed ()
-
-    NÃO PRECISA
-
-8 - Remover sua conta ()
-
-    NÃO PRECISA
-
-Melhorias extras: (!!)
-    ++Add data de aniversario na criacao de perfil e nos dados
-    Corrigir "adicionar amigos"
-            --> Criar uma opcao "ver solicitações" 
-    Melhorar mensagem privada
-    Corrigir Membros da comunidade
-    "remover sua conta" fecha o programa caso o usuario estiver logado
-    deixar o menu mais bonitinho
-
-    --> CRIAR FUNCIONALIDADE "GERENCIAR AMIGOS" (escolher um nome melhro depois)
-            A ideia é criar uma funcionalide que englobe adicionar amigos, ver solicitações, excluir amigos, ver amigos.
+**extra:
+!!Add data de aniversario na criacao de perfil e ver no "minhas informacoes"
+    ao add o aniverdsario corrigir o erro de adicionar uma char a essa data.
+!!feed publico postando o email ao inves do nome (nesse caso colocar outro atributor que sera o id pessoal dele)
+!!corrigir membros de uma comunidade
+!! criar uma funcionalidade "GERENCIAR AMIGOS" (escolher um nome melhro depois)
+            -> englobe adicionar amigos, ver solicitações, excluir amigos, ver amigos.
