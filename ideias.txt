@@ -15,7 +15,7 @@
 !!"remover sua conta" fechava o programa caso o usuario estiver logado (java.lang.IndexOutOfBoundsException:)
 
 **A fazer:
-!!um bug acontece caso o usuario tente apagar sua conta e depois um admin for verificar os usuarios cadastrados (ele consegue apagar mas por algum motivo nao consegue sair da tela de admin)
+
 
 **extra:
 !!Add data de aniversario na criacao de perfil e ver no "minhas informacoes"
@@ -26,3 +26,4 @@
             -> englobe adicionar amigos, ver solicitações, excluir amigos, ver amigos.
 !!nao pode existir dois usuarios com o mesmo nome
 !!nao pode ter duas comunidades com o mesmo nome
+!!um bug acontece caso o usuario tente apagar sua conta e depois um admin for verificar os usuarios cadastrados (ele consegue apagar mas por algum motivo nao consegue sair da tela de admin)
